@@ -266,9 +266,9 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 8.0.1)
-  redis (~> 5.3)
-  sidekiq (~> 7.3.8)
-  sidekiq-cron (~> 2.1)
+  redis
+  sidekiq
+  sidekiq-cron
   solid_cable
   solid_cache
   thruster

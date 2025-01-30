@@ -10,3 +10,15 @@ POSTGRES_PORT=5432
 POSTGRES_DB=rails_knightmare
 POSTGRES_USER=rails_knightmare_user
 POSTGRES_PASSWORD=rails_knightmare_password
+
+
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+
+
+# Sidekiq
+# ------------------------------------------------------------------------------
+SIDEKIQ_CONCURRENCY=5
+SIDEKIQ_WEB_USER=admin
+SIDEKIQ_WEB_PASSWORD=password

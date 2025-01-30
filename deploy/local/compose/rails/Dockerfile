@@ -9,6 +9,7 @@ RUN apt-get update -qq && apt-get install --no-install-recommends -y \
     curl \
     wait-for-it \
     libjemalloc2 \
+    redis-tools \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && rm -rf /var/lib/apt/lists/*
 
@@ -28,6 +29,10 @@ COPY ./deploy/local/compose/rails/start /start
 RUN sed -i 's/\r$//g' /entrypoint \
     && sed -i 's/\r$//g' /start \
     && chmod +x /entrypoint /start
+
+COPY ./deploy/local/compose/rails/sidekiq/start /sidekiq-start
+RUN sed -i 's/\r$//g' /sidekiq-start
+RUN chmod +x /sidekiq-start
 
 # Copy application code
 COPY . .

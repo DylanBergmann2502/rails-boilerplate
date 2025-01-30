@@ -2,6 +2,7 @@
 volumes:
   rails_knightmare_local_postgres_data: {}
   rails_knightmare_local_postgres_data_backups: {}
+  rails_knightmare_local_redis_data: {}
 
 services:
   rails:
@@ -12,6 +13,7 @@ services:
     container_name: rails_knightmare_local_rails
     depends_on:
       - postgres
+      - redis
     volumes:
       - ../..:/app
     env_file:
@@ -31,3 +33,31 @@ services:
       - rails_knightmare_local_postgres_data_backups:/backups
     env_file:
       - ./.envs/.postgres
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: rails_knightmare_local_redis
+    volumes:
+      - rails_knightmare_local_redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+  sidekiq:
+    build:
+      context: ../..
+      dockerfile: ./deploy/local/compose/rails/Dockerfile
+    image: rails_knightmare_local_sidekiq
+    container_name: rails_knightmare_local_sidekiq
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ../..:/app
+    env_file:
+      - ./.envs/.rails
+    command: /sidekiq-start
