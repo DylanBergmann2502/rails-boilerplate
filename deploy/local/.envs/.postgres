@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=rails_knightmare
+POSTGRES_USER=rails_knightmare_user
+POSTGRES_PASSWORD=rails_knightmare_password

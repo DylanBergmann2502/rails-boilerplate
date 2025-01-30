@@ -1,0 +1,33 @@
+# deploy/local/web.yml
+volumes:
+  rails_knightmare_local_postgres_data: {}
+  rails_knightmare_local_postgres_data_backups: {}
+
+services:
+  rails:
+    build:
+      context: ../..
+      dockerfile: ./deploy/local/compose/rails/Dockerfile
+    image: rails_knightmare_local_rails
+    container_name: rails_knightmare_local_rails
+    depends_on:
+      - postgres
+    volumes:
+      - ../..:/app
+    env_file:
+      - ./.envs/.rails
+    ports:
+      - "8000:8000"
+    command: /start
+
+  postgres:
+    build:
+      context: ../..
+      dockerfile: ./deploy/local/compose/postgres/Dockerfile
+    image: rails_knightmare_local_postgres
+    container_name: rails_knightmare_local_postgres
+    volumes:
+      - rails_knightmare_local_postgres_data:/var/lib/postgresql/data
+      - rails_knightmare_local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.postgres
