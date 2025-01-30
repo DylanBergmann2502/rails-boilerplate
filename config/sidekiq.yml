@@ -1,0 +1,16 @@
+# config/sidekiq.yml
+:concurrency: <%= ENV.fetch("SIDEKIQ_CONCURRENCY", 5) %>
+:timeout: 25
+:verbose: false
+:queues:
+  - [critical, 4]
+  - [default, 2]
+  - [low, 1]
+
+:scheduler:
+  :schedule:
+    example_job:
+      cron: '*/15 * * * *'  # Runs every 15 minutes
+      class: ExampleWorker
+      queue: default
+      args: ['scheduled task']
