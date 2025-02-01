@@ -1,0 +1,58 @@
+# .editorconfig
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 120
+
+[*.{rb,rake,gemspec}]
+indent_size = 2
+
+[*.{js,jsx,ts,tsx}]
+indent_size = 2
+
+[*.{css,scss,sass}]
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[Gemfile*]
+indent_size = 2
+
+[Rakefile]
+indent_size = 2
+
+[*.{json,json5}]
+indent_size = 2
+
+[*.{html,html.erb}]
+indent_size = 2
+
+[*.sql]
+indent_size = 2
+
+[Dockerfile]
+indent_size = 2
+
+[*.sh]
+indent_size = 2
+shell_variant = bash
+switch_case_indent = true
+
+[*.xml]
+indent_size = 2
+
+[*.{csv,txt}]
+insert_final_newline = false
+
+[Makefile]
+indent_style = tab
