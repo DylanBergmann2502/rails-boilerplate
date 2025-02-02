@@ -41,6 +41,8 @@ module RailsKnightmare
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.middleware.use Warden::JWTAuth::Middleware
+
     # Enable session middleware for Sidekiq Web UI
     config.session_store :cookie_store, key: '_rails_knightmare_session'
     config.middleware.use ActionDispatch::Cookies
