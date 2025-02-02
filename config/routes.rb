@@ -10,4 +10,21 @@ Rails.application.routes.draw do
   # Mount Sidekiq web UI
   # Note: In production, you'll want to add authentication before mounting this
   mount Sidekiq::Web => '/sidekiq'
+
+  scope :api do
+    scope :v1 do
+      devise_for :users,
+        defaults: { format: :json },
+        path: '',
+        path_names: {
+          sign_in: 'login',
+          sign_out: 'logout',
+          registration: 'signup'
+        },
+        controllers: {
+          sessions: 'api/v1/sessions',
+          registrations: 'api/v1/registrations'
+        }
+    end
+  end
 end
